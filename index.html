@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>앱 링크로 이동</title>
+  <script>
+    // 페이지 로드 시 바로 앱으로 이동
+    window.onload = function() {
+      var schemaURL = getUrlParameter('schemaURL'); // URL 파라미터에서 스키마 URL 가져오기
+
+      // URL 스키마 생성
+      var url = schemaURL;
+
+      // 앱으로 이동
+      window.location.href = url;
+    }
+
+    // URL 파라미터 값 가져오기
+    function getUrlParameter(name) {
+      name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+  </script>
+</head>
+<body>
+  <!-- 페이지 내용 -->
+</body>
+</html>
