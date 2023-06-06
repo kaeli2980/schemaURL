@@ -3,19 +3,22 @@
 <head>
     <title>Redirect</title>
     <script>
-        // 현재 페이지의 URL에서 쿼리 문자열을 가져오는 함수를 정의합니다.
+        // 현재 페이지의 URL에서 쿼리 문자열을 가져오는 함수를 정의
         function getQueryStringValue(key) {
             var urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(key);
         }
 
-        // "schema" 쿼리 문자열 값을 가져옵니다.
+        // "schema" 쿼리 문자열 값을 가져옴
         var schemaUrl = getQueryStringValue('schema');
 
-        // 페이지 로드 시 리다이렉트를 수행합니다.
+        // URL 인코딩을 수행함
+        var encodedSchemaUrl = encodeURIComponent(schemaUrl);
+
+        // 페이지 로드 시 리다이렉트를 수행함
         window.onload = function() {
-            // 현재 창을 스키마 URL로 리다이렉트합니다.
-            window.location.href = schemaUrl;
+            // URL 디코딩하여 스키마 URL로 리다이렉트
+            window.location.href = decodeURIComponent(encodedSchemaUrl);
         };
     </script>
 </head>
