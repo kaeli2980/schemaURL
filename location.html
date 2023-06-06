@@ -10,19 +10,30 @@
         }
 
         // "schema" 쿼리 문자열 값을 가져옴
-        var schemaUrl = getQueryStringValue('schema');
+        var schemaQuery = getQueryStringValue('schema');
 
-        // URL 인코딩을 수행함
-        var encodedSchemaUrl = encodeURIComponent(schemaUrl);
+        // "schema=" 부분을 제거하여 실제 URL을 추출
+        var schemaUrl = schemaQuery.substring('schema='.length);
 
-        // 페이지 로드 시 리다이렉트를 수행함
+        // 페이지 로드 시 리다이렉트를 수행
         window.onload = function() {
-            // URL 디코딩하여 스키마 URL로 리다이렉트
-            window.location.href = decodeURIComponent(encodedSchemaUrl);
+            // PC로 접속했을 경우 안내 문구를 표시하고, 모바일 기기로 접속한 경우에만 리다이렉트를 수행
+            if (!isMobileDevice()) {
+                document.getElementById("message").textContent = "PC로 접속하셨습니다. schema URL 이동이 되지 않을 수도 있습니다.";
+            } else {
+                // 스키마 URL로 리다이렉트함
+                window.location.href = schemaUrl;
+            }
         };
+
+        // 현재 기기가 모바일 기기인지 확인하는 함수를 정의
+        function isMobileDevice() {
+            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+        }
     </script>
 </head>
 <body>
     <h1>Redirecting...</h1>
+    <p id="message"></p>
 </body>
 </html>
