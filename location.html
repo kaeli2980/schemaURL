@@ -19,13 +19,10 @@
         window.onload = function() {
             // PC로 접속했을 경우 안내 문구를 표시하고, 모바일 기기로 접속한 경우에만 리다이렉트를 수행합니다.
             if (!isMobileDevice()) {
-                document.getElementById("message").textContent = JSON.stringify("PC로 접속하셨습니다. 이동이 되지 않을 수도 있습니다.");
+                document.getElementById("message").textContent = "PC로 접속하셨습니다. 이동이 되지 않을 수도 있습니다.";
             } else {
                 // URL 디코딩하여 스키마 URL로 리다이렉트합니다.
-                var decodedSchemaUrl = decodeURIComponent(encodedSchemaUrl);
-                // & 문자를 인터넷 주소에서 인식되는 형태로 변환합니다.
-                decodedSchemaUrl = decodedSchemaUrl.replace(/&amp;/g, '&');
-                window.location.href = decodedSchemaUrl;
+                window.location.href = decodeURIComponent(encodedSchemaUrl);
             }
         };
 
