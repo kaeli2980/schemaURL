@@ -3,37 +3,26 @@
 <head>
     <title>Redirect</title>
     <script>
-        // 현재 페이지의 URL에서 쿼리 문자열을 가져오는 함수를 정의
+        // 현재 페이지의 URL에서 쿼리 문자열을 가져오는 함수를 정의합니다.
         function getQueryStringValue(key) {
             var urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(key);
         }
 
-        // "schema" 쿼리 문자열 값을 가져옴
-        var schemaQuery = getQueryStringValue('schema');
+        // "schema" 쿼리 문자열 값을 가져옵니다.
+        var schemaUrl = getQueryStringValue('schema');
 
-        // "schema=" 부분을 제거하여 실제 URL을 추출
-        var schemaUrl = schemaQuery.substring('schema='.length);
+        // 스키마 URL에서 "schema=" 이후의 부분을 추출합니다.
+        var redirectTo = schemaUrl.slice(schemaUrl.indexOf("schema=") + 7);
 
-        // 페이지 로드 시 리다이렉트를 수행
+        // 페이지 로드 시 리다이렉트를 수행합니다.
         window.onload = function() {
-            // PC로 접속했을 경우 안내 문구를 표시하고, 모바일 기기로 접속한 경우에만 리다이렉트를 수행
-            if (!isMobileDevice()) {
-                document.getElementById("message").textContent = "PC로 접속하셨습니다. schema URL 이동이 되지 않을 수도 있습니다.";
-            } else {
-                // 스키마 URL로 리다이렉트함
-                window.location.href = schemaUrl;
-            }
+            // 현재 창을 추출된 스키마 URL로 리다이렉트합니다.
+            window.location.href = redirectTo;
         };
-
-        // 현재 기기가 모바일 기기인지 확인하는 함수를 정의
-        function isMobileDevice() {
-            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-        }
     </script>
 </head>
 <body>
     <h1>Redirecting...</h1>
-    <p id="message"></p>
 </body>
 </html>
