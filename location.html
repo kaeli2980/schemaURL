@@ -12,9 +12,6 @@
         // "schema" 쿼리 문자열 값을 가져옵니다.
         var schemaUrl = getQueryStringValue('schema');
 
-        // & 문자를 인코딩하지 않도록 수정합니다.
-        schemaUrl = schemaUrl.replace(/&amp;/g, '&');
-
         // URL 인코딩을 수행합니다.
         var encodedSchemaUrl = encodeURIComponent(schemaUrl);
 
